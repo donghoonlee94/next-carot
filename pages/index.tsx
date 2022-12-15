@@ -100,6 +100,9 @@ const Home: NextPage = () => {
         <span className="hidden peer-hover:block peer-hover:text-amber-500">Hello</span>
         <input type="submit" value="Login" className="bg-white" />
       </form>
+      <div className="flex flex-col space-y-2  p-5 ">
+        <p className="first-letter:text-7xl first-letter:hover:text-purple-400">Hello everyone!</p>
+      </div>
     </div>
   );
 };
