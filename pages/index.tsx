@@ -96,6 +96,9 @@ const Home: NextPage = () => {
       <div className="flex flex-col space-y-2  p-5 ">
         <p className="first-letter:text-7xl first-letter:hover:text-purple-400">Hello everyone!</p>
       </div>
+      <div className="dark:md:hover:bg-teal-400 bg-[url('/vercel.svg')]">
+        <h2 className="text-[97851px] text-[#000]">Hello</h2>
+      </div>
     </div>
   );
 };
