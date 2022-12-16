@@ -5,7 +5,7 @@ import Message from "../../components/message";
 const Stream: NextPage = () => {
   return (
     <Layout canGoBack>
-      <div className="py-10 px-4  space-y-4">
+      <div className="py-10 px-4 space-y-4">
         <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />
         <div className="mt-5">
           <h1 className="text-3xl font-bold text-gray-900">Galaxy S50</h1>
