@@ -5,7 +5,7 @@ declare global {
 }
 
 // 클라이언트가 여러번 중복 생성되는 이슈가 있음.
-const client = global.client || new PrismaClient();
+const client = global.client || new PrismaClient({ log: ["query"] });
 
 if (process.env.NODE_ENV === "development") global.client = client;
 
