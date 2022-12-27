@@ -7,13 +7,13 @@ export function middleware(req: NextRequest) {
         return new Response("Plz don't be a bot. Be human.", { status: 403 });
     }
 
-    if (!req.url.includes("/api")) {
-        if (!req.url.includes("/enter") && !req?.cookies?.carrotsession) {
-            const url = req.nextUrl.clone()
-            url.pathname = '/enter'
-            return NextResponse.redirect(`${url}`)
-        }
-    }
+    // if (!req.url.includes("/api")) {
+    //     if (!req.url.includes("/enter") && !req?.cookies?.carrotsession) {
+    //         const url = req.nextUrl.clone()
+    //         url.pathname = '/enter'
+    //         return NextResponse.redirect(`${url}`)
+    //     }
+    // }
 }
 
 export const config = {
