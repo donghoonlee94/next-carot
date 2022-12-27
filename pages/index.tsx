@@ -7,6 +7,7 @@ import Head from "next/head";
 import useSWR, { SWRConfig } from "swr";
 import { Product } from "@prisma/client";
 import client from "@libs/server/client";
+import withSWRConfigFallback from "@components/withSWRConfigFallback";
 
 export interface ProductWithCount extends Product {
   _count: {
@@ -22,24 +23,23 @@ interface ProductsResponse {
 const Home: NextPage = () => {
   const { user, isLoading } = useUser();
   const { data } = useSWR<ProductsResponse>("/api/products");
+  console.log('data', data)
   return (
     <Layout title="홈" hasTabBar>
       <Head>
         <title>Home</title>
       </Head>
       <div className="flex flex-col space-y-5 divide-y">
-        {data
-          ? data?.products?.map((product) => (
-            <Item
-              id={product.id}
-              key={product.id}
-              title={product.name}
-              price={product.price}
-              hearts={product._count?.favs || 0}
-              image={product.image}
-            />
-          ))
-          : "Loading..."}
+        {data?.products?.map((product) => (
+          <Item
+            id={product.id}
+            key={product.id}
+            title={product.name}
+            price={product.price}
+            hearts={product._count?.favs || 0}
+            image={product.image}
+          />
+        ))}
         <FloatingButton href="/products/upload">
           <svg
             className="h-6 w-6"
@@ -62,32 +62,18 @@ const Home: NextPage = () => {
   );
 };
 
-const Page: NextPage<{ products: ProductWithCount[] }> = (props) => {
-  console.log('props', props)
-  return (
-    <SWRConfig
-      value={{
-        fallback: {
-          "/api/products": {
-            ok: true,
-            products: props.products,
-          },
-        },
-      }}
-    >
-      <Home />
-    </SWRConfig>
-  );
-};
-
 export async function getServerSideProps() {
-  console.log("SSR");
   const products = await client.product.findMany({});
   return {
     props: {
-      products: JSON.parse(JSON.stringify(products)),
+      fallback: {
+        "/api/products": {
+          ok: true,
+          products: JSON.parse(JSON.stringify(products)),
+        }
+      },
     },
   };
 }
 
-export default Page;
+export default withSWRConfigFallback(Home);
