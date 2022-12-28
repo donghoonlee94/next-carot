@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse, userAgent } from 'next/server'
 
 export function middleware(req: NextRequest) {
-    const { isBot } = userAgent(req);
-    const { origin } = req.nextUrl;
-    if (isBot) {
-        return new Response("Plz don't be a bot. Be human.", { status: 403 });
-    }
-
     // if (!req.url.includes("/api")) {
     //     if (!req.url.includes("/enter") && !req?.cookies?.carrotsession) {
     //         const url = req.nextUrl.clone()
