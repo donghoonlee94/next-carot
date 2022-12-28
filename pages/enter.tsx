@@ -12,10 +12,7 @@ import dynamic from "next/dynamic";
 // import Bs from "@components/bs";
 
 const Bs = dynamic(
-  () =>
-    new Promise((resolve) =>
-      setTimeout(() => resolve(import("@components/bs")), 2000)
-    ),
+  () => import("@components/bs"),
   { ssr: false, suspense: true, loading: () => <span>loading</span> }
 );
 
