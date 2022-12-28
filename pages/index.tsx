@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { NextPage, NextPageContext } from "next";
 import FloatingButton from "@components/floating-button";
 import Item from "@components/item";
 import Layout from "@components/layout";
@@ -62,7 +62,8 @@ const Home: NextPage = () => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx: NextPageContext) {
+  console.log('123124124', ctx.req?.session)
   const products = await client.product.findMany({});
   return {
     props: {
