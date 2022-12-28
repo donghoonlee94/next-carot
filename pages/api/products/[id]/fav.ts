@@ -5,7 +5,7 @@ import { withApiSession } from '@libs/server/withSession';
 
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
   const {
-    query: { id },
+    query: { id = '' },
     session: { user },
   } = req;
   const alreadyExists = await client.fav.findFirst({
