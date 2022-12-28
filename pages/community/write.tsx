@@ -24,7 +24,7 @@ const Write: NextPage = () => {
   const [post, { loading, data }] = useMutation<WriteResponse>('/api/posts');
   const onValid = (data: WriteForm) => {
     if (loading) return;
-    post({ ...data, latitude, longitude });
+    post({ ...data });
   };
   useEffect(() => {
     if (data && data.ok) {
